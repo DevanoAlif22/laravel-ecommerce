@@ -9,71 +9,69 @@
         <div class="col-md-10 offset-1 mt-5">
          
 
-            <!-- Profile Information Card -->
-            <div class="card shadow border-0 mb-4">
-                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                    <h5 class="mb-0 text-primary">
-                        <i class="bi bi-person-lines-fill me-2"></i>Informasi Profil
-                    </h5>
-                  
+          <div class="card shadow border-0 mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h5 class="mb-0 text-primary">
+            <i class="bi bi-person-lines-fill me-2"></i>Informasi Profil
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Username</label>
+                    <p class="mb-0 fw-bold">{{ $user->name }}</p>
                 </div>
-                <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Username</label>
-                                <p class="mb-0 fw-bold">johndoe123</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Email</label>
-                                <p class="mb-0 fw-bold">johndoe@example.com</p>
-                            </div>
-                            <div class="mb-0">
-                                <label class="form-label text-muted small">Tanggal Lahir</label>
-                                <p class="mb-0 fw-bold">15 Maret 1990</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Jenis Kelamin</label>
-                                <p class="mb-0 fw-bold">Laki-laki</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Nomor Kontak</label>
-                                <p class="mb-0 fw-bold">+62 812 3456 7890</p>
-                            </div>
-                            <div class="mb-0">
-                                <label class="form-label text-muted small">PayPal ID</label>
-                                <p class="mb-0 fw-bold">johndoe@paypal.com</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Email</label>
+                    <p class="mb-0 fw-bold">{{ $user->email }}</p>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">Tanggal Lahir</label>
+                    <p class="mb-0 fw-bold">{{ \Carbon\Carbon::parse($user->birth)->translatedFormat('d F Y') }}</p>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Jenis Kelamin</label>
+                    <p class="mb-0 fw-bold">{{ $user->gender == 'Male' ? 'Laki-laki' : 'Perempuan' }}</p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Nomor Kontak</label>
+                    <p class="mb-0 fw-bold">{{ $user->contact }}</p>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">PayPal ID</label>
+                    <p class="mb-0 fw-bold">{{ $user->bill }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Address Information Card -->
-            <div class="card shadow border-0 mb-4">
-                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                    <h5 class="mb-0 text-primary">
-                        <i class="bi bi-geo-alt-fill me-2"></i>Informasi Alamat
-                    </h5>
-                 
+<!-- Address Information Card -->
+<div class="card shadow border-0 mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h5 class="mb-0 text-primary">
+            <i class="bi bi-geo-alt-fill me-2"></i>Informasi Alamat
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Alamat Lengkap</label>
+                    <p class="mb-0 fw-bold">{{ $user->address }}</p>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label text-muted small">Alamat Lengkap</label>
-                                <p class="mb-0 fw-bold">Jl. Pahlawan No. 123, RT 01/RW 02, Kelurahan Sukamaju</p>
-                            </div>
-                            <div class="mb-0">
-                                <label class="form-label text-muted small">Kota</label>
-                                <p class="mb-0 fw-bold">Jakarta</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">Kota</label>
+                    <p class="mb-0 fw-bold">{{ $user->city }}</p>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
 
             <!-- Recent Purchases -->
             <div class="card shadow border-0">

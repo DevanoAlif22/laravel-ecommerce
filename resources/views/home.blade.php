@@ -24,70 +24,66 @@
 <!-- Welcome Section -->
 <section class="welcome-section py-5">
     <div class="container">
-     <div class="row justify-content-center">
-    <div class="col-md-10 text-center">
-        <h2 class="fw-bold mb-4">Selamat Datang di MediMart</h2>
-        <p class="lead text-muted mb-5">Kami menyediakan berbagai macam alat kesehatan terpercaya dan berkualitas tinggi untuk kebutuhan rumah tangga hingga profesional. MediMart hadir untuk membantu Anda menjaga kesehatan — kapan pun dan di mana pun, dengan layanan ke seluruh dunia.</p>
-    </div>
-</div>
-
-<!-- Feature Cards -->
-<div class="row g-4">
-    <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
-                    <i class="bi bi-truck text-primary" style="font-size: 2rem;"></i>
+        <!-- Welcome Text -->
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
-                <h2 class="fw-bold mb-4">Selamat Datang di FrozenDelight</h2>
-                <p class="lead text-muted mb-5">Kami menyediakan berbagai macam frozen food berkualitas premium untuk memenuhi kebutuhan kuliner Anda. Diolah dengan bahan-bahan segar dan proses yang higienis, produk kami siap memanjakan lidah Anda dan keluarga.</p>
+                <h2 class="fw-bold mb-4">Selamat Datang di MediMart</h2>
+                <p class="lead text-muted mb-5">
+                    Kami menyediakan berbagai macam alat kesehatan terpercaya dan berkualitas tinggi untuk kebutuhan rumah tangga hingga profesional. MediMart hadir untuk membantu Anda menjaga kesehatan — kapan pun dan di mana pun, dengan layanan ke seluruh dunia.
+                </p>
             </div>
         </div>
 
         <!-- Feature Cards -->
         <div class="row g-4">
+            <!-- Card 1: Pengiriman Global -->
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body text-center p-4">
                         <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
                             <i class="bi bi-truck text-primary" style="font-size: 2rem;"></i>
                         </div>
-                        <h4 class="card-title">Pengiriman Cepat</h4>
-                        <p class="card-text text-muted">Kami mengirimkan produk frozen food dengan cepat langsung ke rumah Anda di seluruh area Surabaya.</p>
+                        <h4 class="card-title">Pengiriman Global</h4>
+                        <p class="card-text text-muted">
+                            Kami melayani pengiriman alat kesehatan ke seluruh dunia dengan proses yang cepat dan aman.
+                        </p>
                     </div>
                 </div>
-                <h4 class="card-title">Pengiriman Global</h4>
-                <p class="card-text text-muted">Kami melayani pengiriman alat kesehatan ke seluruh dunia dengan proses yang cepat dan aman.</p>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
-                    <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
-                </div>
-                <h4 class="card-title">Kualitas Terjamin</h4>
-                <p class="card-text text-muted">Setiap produk telah lulus uji dan memiliki standar kualitas serta sertifikasi kesehatan internasional.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
-                    <i class="bi bi-currency-exchange text-primary" style="font-size: 2rem;"></i>
-                </div>
-                <h4 class="card-title">Harga Kompetitif</h4>
-                <p class="card-text text-muted">Kami menawarkan produk berkualitas tinggi dengan harga yang bersahabat, serta berbagai promo menarik.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
+            <!-- Card 2: Kualitas Terjamin -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
+                            <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="card-title">Kualitas Terjamin</h4>
+                        <p class="card-text text-muted">
+                            Setiap produk telah lulus uji dan memiliki standar kualitas serta sertifikasi kesehatan internasional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Harga Kompetitif -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
+                            <i class="bi bi-currency-exchange text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="card-title">Harga Kompetitif</h4>
+                        <p class="card-text text-muted">
+                            Kami menawarkan produk berkualitas tinggi dengan harga yang bersahabat, serta berbagai promo menarik.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
 
 
 

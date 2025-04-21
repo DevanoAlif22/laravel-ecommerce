@@ -7,61 +7,33 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-     <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link fw-medium {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link fw-medium {{ Request::is('products') ? 'active' : '' }}" href="{{ url('/products') }}">Produk</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link fw-medium {{ Request::is('baskets') ? 'active' : '' }}" href="{{ url('/baskets') }}">Keranjang</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link fw-medium {{ Request::is('detailUser') ? 'active' : '' }}" href="{{ url('/detailUser') }}">Profil</a>
-        </li>
-    </ul>
-    <div class="ms-3 d-flex ">
-        <a href="{{ url('/login') }}" class="btn btn-primary">
-            <i class="bi bi-person"></i> Login
-        </a>
-    </div>
-</div>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active fw-medium" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link fw-medium {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium" href="{{ url('/products') }}">Produk</a>
+                    <a class="nav-link fw-medium {{ Request::is('products') ? 'active' : '' }}" href="{{ url('/products') }}">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium" href="{{ url('/categories') }}">Kategori</a>
+                    <a class="nav-link fw-medium {{ Request::is('categories') ? 'active' : '' }}" href="{{ url('/baskets') }}">Keranjang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium" href="{{ url('/promo') }}">Promo</a>
+                    <a class="nav-link fw-medium {{ Request::is('promo') ? 'active' : '' }}" href="{{ url('/detailUser') }}">Profil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="{{ url('/about') }}">Tentang Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="{{ url('/contact') }}">Kontak</a>
-                </li>
+               
             </ul>
+
             <div class="ms-3 d-flex">
-                {{-- <a href="{{ url('/cart') }}" class="btn btn-outline-primary me-2">
-                    <i class="bi bi-cart3"></i> <span class="badge bg-danger">0</span>
-                </a> --}}
                 @if (Auth::user())
                     <a href="{{ url('/logout') }}" class="btn btn-danger">
-                        <i class="bi bi-box-arrow-right me-1"></i>Logout
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 @else
                     <a href="{{ url('/login') }}" class="btn btn-primary">
                         <i class="bi bi-person"></i> Login
                     </a>
-
                 @endif
             </div>
         </div>

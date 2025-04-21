@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
@@ -62,8 +63,8 @@ class FrontController extends Controller
     }
     public function detailUser()
     {
-
-        return view('detailUser');
+ $user = Auth::user();
+        return view('detailUser',compact('user'));
     }
     public function invoice()
     {
