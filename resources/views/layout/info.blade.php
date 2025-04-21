@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <div class="alert alert-danger" style="width: 350px !important">
+    <div class="alert alert-danger" style="width: 100% !important">
         <ul>
             @foreach ($errors->all() as $item)
                 <li>{{$item}}</li>
