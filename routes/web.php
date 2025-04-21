@@ -21,3 +21,5 @@ Route::get('/detailProduct', [FrontController::class, 'detailProduct'])->name('d
 Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
 Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
 Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
+Route::get('/detailUser', [FrontController::class, 'detailUser'])->name('detailUser');
+Route::get('/invoice', [FrontController::class, 'invoice'])->name('invoice');
