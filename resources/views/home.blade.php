@@ -29,7 +29,7 @@
                 <p class="lead text-muted mb-5">Kami menyediakan berbagai macam frozen food berkualitas premium untuk memenuhi kebutuhan kuliner Anda. Diolah dengan bahan-bahan segar dan proses yang higienis, produk kami siap memanjakan lidah Anda dan keluarga.</p>
             </div>
         </div>
-        
+
         <!-- Feature Cards -->
         <div class="row g-4">
             <div class="col-md-4">
@@ -74,80 +74,32 @@
 <!-- Featured Products -->
 <section class="featured-products py-5 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bold mb-5">Produk Unggulan</h2>
+        <h2 class="text-center fw-bold mb-5">Produk Terbaru</h2>
         <div class="row g-4">
             <!-- Product 1 -->
+            @foreach ($products as $item)
             <div class="col-6 col-md-3">
                 <div class="card product-card border-0 shadow-sm h-100">
-                    <div class="category-label">Makanan</div> <!-- Kategori produk -->
-                    <img src="{{ asset('images/sosis.jpg') }}" class="card-img-top" alt="Dumpling">
+                    <div class="category-label">{{ $item->category->name
+                     }}</div> <!-- Kategori produk -->
+                    <img src="/public/uploads/product/{{ $item->image }}" class="card-img-top" alt="Dumpling">
                     <div class="card-body">
-                        <h5 class="card-title">Bakso Sapi Premium</h5>
-                        <p class="card-text text-muted">Nikmati rasa bakso sapi premium yang lembut dan gurih. Cocok untuk makan keluarga atau sebagai camilan lezat!</p>
+                        <h5 class="card-title">{{ $item->name }}</h5>
+                        <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($item->description, 100) }}</p>
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="text-danger fw-bold mb-0">Rp 65.000</p>
+                            <p class="text-danger fw-bold mb-0">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                         </div>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary">Tambah ke Keranjang</a>
+                            <a href="/product/detail/{{$item->id}}" class="btn btn-primary">Detail Produk</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="col-6 col-md-3">
-                <div class="card product-card border-0 shadow-sm h-100">
-                    <div class="category-label">Makanan</div> <!-- Kategori produk -->
-                    <img src="{{ asset('images/sosis.jpg') }}" class="card-img-top" alt="Dumpling">
-                    <div class="card-body">
-                        <h5 class="card-title">Bakso Sapi Premium</h5>
-                        <p class="card-text text-muted">Nikmati rasa bakso sapi premium yang lembut dan gurih. Cocok untuk makan keluarga atau sebagai camilan lezat!</p>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="text-danger fw-bold mb-0">Rp 65.000</p>
-                        </div>
-                        <div class="d-grid">
-                            <a href="#" class="btn btn-primary">Tambah ke Keranjang</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product 3 -->
-            <div class="col-6 col-md-3">
-                <div class="card product-card border-0 shadow-sm h-100">
-                    <div class="category-label">Makanan</div> <!-- Kategori produk -->
-                    <img src="{{ asset('images/sosis.jpg') }}" class="card-img-top" alt="Dumpling">
-                    <div class="card-body">
-                        <h5 class="card-title">Bakso Sapi Premium</h5>
-                        <p class="card-text text-muted">Nikmati rasa bakso sapi premium yang lembut dan gurih. Cocok untuk makan keluarga atau sebagai camilan lezat!</p>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="text-danger fw-bold mb-0">Rp 65.000</p>
-                        </div>
-                        <div class="d-grid">
-                            <a href="#" class="btn btn-primary">Tambah ke Keranjang</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product 4 -->
-            <div class="col-6 col-md-3">
-                <div class="card product-card border-0 shadow-sm h-100">
-                    <div class="category-label">Makanan</div> <!-- Kategori produk -->
-                    <img src="{{ asset('images/sosis.jpg') }}" class="card-img-top" alt="Dumpling">
-                    <div class="card-body">
-                        <h5 class="card-title">Bakso Sapi Premium</h5>
-                        <p class="card-text text-muted">Nikmati rasa bakso sapi premium yang lembut dan gurih. Cocok untuk makan keluarga atau sebagai camilan lezat!</p>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <p class="text-danger fw-bold mb-0">Rp 65.000</p>
-                        </div>
-                        <div class="d-grid">
-                            <a href="#" class="btn btn-primary">Tambah ke Keranjang</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-        
-        
-        
+
+
+
         <div class="text-center mt-4">
             <a href="{{ url('/products') }}" class="btn btn-outline-primary">Lihat Semua Produk</a>
         </div>
@@ -174,31 +126,31 @@
     .navbar-brand {
         font-size: 1.5rem;
     }
-    
+
     /* Style untuk hero section */
     .hero-section {
         margin-bottom: 50px;
     }
-    
+
     /* Style tambahan untuk kartu kategori */
     .category-card img {
         height: 160px;
         object-fit: cover;
     }
-    
+
     /* Style tambahan untuk produk */
     .product-card img {
         height: 180px;
         object-fit: cover;
     }
-    
+
     /* Custom style untuk heading */
     h2 {
         position: relative;
         display: inline-block;
         padding-bottom: 10px;
     }
-    
+
     h2:after {
         content: '';
         position: absolute;
@@ -209,59 +161,59 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     /* Custom style untuk animasi link */
     a.btn {
         transition: all 0.3s ease;
     }
-    
+
     a.btn:hover {
         transform: scale(1.05);
     }
     .product-card {
     position: relative;
-}
+    }
 
-.category-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 5px;
-}
+    .category-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 5px;
+    }
 
-.card-img-top {
-    border-radius: 5px 5px 0 0;
-}
+    .card-img-top {
+        border-radius: 5px 5px 0 0;
+    }
 
-.card-body {
-    padding: 15px;
-}
+    .card-body {
+        padding: 15px;
+    }
 
-.card-title {
-    font-size: 16px;
-    font-weight: bold;
-}
+    .card-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-.card-text {
-    font-size: 14px;
-    color: #6c757d;
-}
+    .card-text {
+        font-size: 14px;
+        color: #6c757d;
+    }
 
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    transition: background-color 0.3s;
-}
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s;
+    }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
 
 </style>
 

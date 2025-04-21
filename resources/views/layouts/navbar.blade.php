@@ -29,12 +29,19 @@
                 </li>
             </ul>
             <div class="ms-3 d-flex">
-                <a href="{{ url('/cart') }}" class="btn btn-outline-primary me-2">
+                {{-- <a href="{{ url('/cart') }}" class="btn btn-outline-primary me-2">
                     <i class="bi bi-cart3"></i> <span class="badge bg-danger">0</span>
-                </a>
-                <a href="{{ url('/login') }}" class="btn btn-primary">
-                    <i class="bi bi-person"></i> Login
-                </a>
+                </a> --}}
+                @if (Auth::user())
+                    <a href="{{ url('/logout') }}" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-right me-1"></i>Logout
+                    </a>
+                @else
+                    <a href="{{ url('/login') }}" class="btn btn-primary">
+                        <i class="bi bi-person"></i> Login
+                    </a>
+
+                @endif
             </div>
         </div>
     </div>
