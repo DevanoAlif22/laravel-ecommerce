@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,10 +63,11 @@ class FrontController extends Controller
         return view('auth.register');
     }
     public function detailUser()
-    {
- $user = Auth::user();
-        return view('detailUser',compact('user'));
-    }
+{
+    $user = Auth::user();
+   $transactions = Transaction::where('user_id', $user->id)->latest()->get();
+    return view('detailUser', compact('user', 'transactions'));
+}
     public function invoice()
     {
 

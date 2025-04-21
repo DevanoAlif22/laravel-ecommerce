@@ -33,6 +33,12 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+    public function transactions()
+{
+    return $this->hasMany(Transaction::class);
+}
+
 
     public function shippingMethod()
     {
