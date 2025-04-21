@@ -36,8 +36,7 @@
                         @endif
                         <h2 class="mb-2">{{ $product->name }}</h2>
                         <div class="d-flex align-items-center mb-3">
-                            <h3 class="text-danger fw-bold mb-0">Rp {{ number_format($item->price, 0, ',', '.') }}</h3>
-
+                            <h3 class="text-danger fw-bold mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
                         </div>
 
 
@@ -100,7 +99,7 @@
                             <p class="text-danger fw-bold mb-0">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                         </div>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary">Detail Produk</a>
+                            <a href="/product/detail/{{$item->id}}" class="btn btn-primary">Detail Produk</a>
                         </div>
                     </div>
                 </div>

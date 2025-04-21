@@ -17,7 +17,7 @@
                     <a class="nav-link fw-medium {{ Request::is('products') ? 'active' : '' }}" href="{{ url('/products') }}">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-medium {{ Request::is('categories') ? 'active' : '' }}" href="{{ url('/baskets') }}">Keranjang</a>
+                    <a class="nav-link fw-medium {{ Request::is('cart') ? 'active' : '' }}" href="{{ url('/cart') }}">Keranjang</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-medium {{ Request::is('promo') ? 'active' : '' }}" href="{{ url('/detailUser') }}">Profil</a>

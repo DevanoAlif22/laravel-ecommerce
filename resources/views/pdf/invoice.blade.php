@@ -4,40 +4,6 @@
 
 @section('content')
 
-
-<style>
-    @media print {
-        body * {
-            visibility: hidden;
-        }
-        .print-area, .print-area * {
-            visibility: visible;
-        }
-        .print-area {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        .no-print {
-            display: none !important;
-        }
-        .card {
-            border: none !important;
-            box-shadow: none !important;
-        }
-        table {
-            width: 100% !important;
-        }
-        .no-prnt {
-            display: none !important;
-        }
-    }
-</style>
-
-
 <div class="container my-5 print-area">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -158,7 +124,7 @@
                                 </div>
                             @else
                                 <div class="text-end">
-                                    <button onclick="window.print()" class="no-print btn btn-outline-primary">
+                                    <button onclick="window.print()" class="btn btn-outline-primary">
                                         <i class="bi bi-printer me-2"></i>Cetak Invoice
                                     </button>
                                 </div>
@@ -171,15 +137,20 @@
 
             <!-- Tindakan -->
             <div class="d-flex justify-content-between">
-                <a href="{{ route('home') }}" class="no-print btn btn-outline-secondary">
+                <a href="{{ route('home') }}" class="btn btn-outline-secondary">
                     <i class="bi bi-arrow-left me-2"></i>Kembali ke Beranda
                 </a>
                 
                 @if($transaction->payment_status == 'paid')
-                    <a href="{{ route('invoice.print', $transaction->id) }}" class="no-print btn btn-outline-primary" target="_blank">
+                    <a href="{{ route('invoice.print', $transaction->id) }}" class="btn btn-outline-primary" target="_blank">
                         <i class="bi bi-printer me-2"></i>Cetak Invoice
                     </a>
                 @endif
+            </div>
+
+            <!-- Footer Invoice -->
+            <div class="text-center mt-5">
+                <small class="text-muted">Invoice ini dicetak secara otomatis dan tidak memerlukan tanda tangan.</small>
             </div>
 
             <!-- Error container untuk hasil operasi pembayaran -->
