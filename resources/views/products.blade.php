@@ -48,16 +48,23 @@
 
             <!-- Category Filter -->
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold mb-3">Kategori</h5>
-                    <div class="list-group list-group-flush">
-                        <a href="{{ url('/products') }}" class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center">Semua Produk</a>
-                        @foreach ($categories as $item)
-                        <a href="/products/{{$item->id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">{{$item->name}}</a>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+    <div class="card-body">
+        <h5 class="card-title fw-bold mb-3">Kategori</h5>
+        <div class="list-group list-group-flush">
+            <a href="{{ url('/products') }}" 
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->segment(2) == '' ? 'active' : '' }}">
+               Semua Produk
+            </a>
+            @foreach ($categories as $item)
+                <a href="/products/{{ $item->id }}" 
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->segment(2) == $item->id ? 'active' : '' }}">
+                   {{ $item->name }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+
         </div>
 
         <!-- Products Grid -->

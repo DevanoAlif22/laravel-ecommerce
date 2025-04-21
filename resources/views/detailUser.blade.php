@@ -1,0 +1,130 @@
+@extends('layouts.front')
+
+@section('title', 'Detail Profil - Toko Alat Kesehatan')
+
+@section('content')
+<div class="container my-5">
+    <div class="row">
+  
+        <div class="col-md-10 offset-1 mt-5">
+         
+
+          <div class="card shadow border-0 mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h5 class="mb-0 text-primary">
+            <i class="bi bi-person-lines-fill me-2"></i>Informasi Profil
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Username</label>
+                    <p class="mb-0 fw-bold">{{ $user->name }}</p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Email</label>
+                    <p class="mb-0 fw-bold">{{ $user->email }}</p>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">Tanggal Lahir</label>
+                    <p class="mb-0 fw-bold">{{ \Carbon\Carbon::parse($user->birth)->translatedFormat('d F Y') }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Jenis Kelamin</label>
+                    <p class="mb-0 fw-bold">{{ $user->gender == 'Male' ? 'Laki-laki' : 'Perempuan' }}</p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Nomor Kontak</label>
+                    <p class="mb-0 fw-bold">{{ $user->contact }}</p>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">PayPal ID</label>
+                    <p class="mb-0 fw-bold">{{ $user->bill }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Address Information Card -->
+<div class="card shadow border-0 mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h5 class="mb-0 text-primary">
+            <i class="bi bi-geo-alt-fill me-2"></i>Informasi Alamat
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Alamat Lengkap</label>
+                    <p class="mb-0 fw-bold">{{ $user->address }}</p>
+                </div>
+                <div class="mb-0">
+                    <label class="form-label text-muted small">Kota</label>
+                    <p class="mb-0 fw-bold">{{ $user->city }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Recent Purchases -->
+            <div class="card shadow border-0">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="mb-0 text-primary">
+                        <i class="bi bi-clock-history me-2"></i>Riwayat Pembelian
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Status</th>
+                                  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#ORD-2023-001</td>
+                                    <td>10 Apr 2023</td>
+                                    <td>Rp 750.000</td>
+                                    <td><span class="badge bg-success">Selesai</span></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>#ORD-2023-002</td>
+                                    <td>25 Mar 2023</td>
+                                    <td>Rp 1.250.000</td>
+                                    <td><span class="badge bg-success">Selesai</span></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>#ORD-2023-003</td>
+                                    <td>12 Mar 2023</td>
+                                    <td>Rp 500.000</td>
+                                    <td><span class="badge bg-info">Dikirim</span></td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<!-- Tambahkan link ke Bootstrap Icons jika belum ada di layout utama -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+@endpush

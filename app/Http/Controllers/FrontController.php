@@ -90,4 +90,14 @@ class FrontController extends Controller
 
         return view('auth.register');
     }
+    public function detailUser()
+    {
+ $user = Auth::user();
+        return view('detailUser',compact('user'));
+    }
+    public function invoice()
+    {
+
+        return view('invoice');
+    }
 }
