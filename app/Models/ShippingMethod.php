@@ -24,6 +24,6 @@ class ShippingMethod extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class, 'shipping_method_id');
+        return $this->hasMany(Transaction::class, 'transaction_id');
     }
 }

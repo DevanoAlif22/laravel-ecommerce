@@ -20,6 +20,8 @@ class Transaction extends Model
         'status',
         'payment',
         'total',
+        'token',
+        'method',
     ];
 
     protected $casts = [
@@ -34,9 +36,11 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+
+
     public function shippingMethod()
     {
-        return $this->belongsTo(ShippingMethod::class, 'shipping_method_id')->nullable();
+        return $this->belongsTo(ShippingMethod::class, 'shipping_method_id');
     }
 
     public function cart()
