@@ -33,9 +33,9 @@
                 <th>No</th>
                 <th>User</th>
                 <th>Shipping</th>
-                <th>Payment</th>
                 <th>Status</th>
                 <th>Total</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -45,9 +45,39 @@
                 <td>{{ $i }}</td>
                 <td>{{ $data->user->name }}</td>
                 <td>{{ $data->shippingMethod->name }}</td>
-                <td>{{ $data->payment }}</td>
-                <td>{{ $data->status }}</td>
+                <td>
+                    @if ($data->status == 'Menunggu')
+                        <span class="badge bg-warning text-dark">Menunggu</span>
+                    @elseif ($data->status == 'Gagal')
+                        <span class="badge bg-danger">Gagal</span>
+                    @elseif ($data->status == 'Berhasil')
+                        <span class="badge bg-success">Berhasil</span>
+                    @else
+                        <span class="badge bg-secondary">{{ $data->status }}</span>
+                    @endif
+                </td>
                 <td>{{ $data->total }}</td>
+                <td>
+                {{-- jika berhasil bisa href invoice, jika masih menunggu bisa dibatalkan --}}
+                @if ($data->status == 'Berhasil')
+                    <a href="/invoice/{{$data->id}}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-file-ear-fill"></i> Invoice
+                    </a>
+                @elseif ($data->status == 'Menunggu')
+                    <div class="d-flex gap-3">
+                        <a href="/invoice/{{$data->id}}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-file-ear-fill"></i> Invoice
+                        </a>
+                        <a href="/admin/invoice/cancel/{{$data->id}}" class="btn btn-primary btn-danger">
+                            <i class="bi bi-file-ear-fill"></i> Cancel
+                        </a>
+                    </div>
+                @else
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        <i class="bi bi-x-circle"></i> Tidak Tersedia
+                    </button>
+                @endif
+            </td>
                 @php $i++; @endphp
               </tr>
               @endforeach

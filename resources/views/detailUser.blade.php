@@ -7,7 +7,6 @@
     <div class="row">
   
         <div class="col-md-10 offset-1 mt-5">
-         
 
           <div class="card shadow border-0 mb-4">
     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
@@ -80,6 +79,9 @@
                         <i class="bi bi-clock-history me-2"></i>Riwayat Pembelian
                     </h5>
                 </div>
+                @if ($errors->any() || Session::get('success'))
+                        @include('layout/info')
+                @endif
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -89,7 +91,7 @@
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Status</th>
-                                  
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                            <tbody>
@@ -110,6 +112,27 @@
                     };
                 @endphp
                 <span class="badge {{ $badgeClass }}">{{ ucfirst($transaction->status) }}</span>
+            </td>
+            <td>
+                {{-- jika berhasil bisa href invoice, jika masih menunggu bisa dibatalkan --}}
+                @if ($transaction->status == 'Berhasil')
+                    <a href="/invoice/{{$transaction->id}}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-file-ear-fill"></i> Invoice
+                    </a>
+                @elseif ($transaction->status == 'Menunggu')
+                    <div class="d-flex  gap-3">
+                        <a href="/invoice/{{$transaction->id}}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-file-ear-fill"></i> Invoice
+                        </a>
+                        <a href="/invoice/cancel/{{$transaction->id}}" class="btn btn-primary btn-danger">
+                            <i class="bi bi-file-ear-fill"></i> Cancel
+                        </a>
+                    </div>
+                @else
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        <i class="bi bi-x-circle"></i> Tidak Tersedia
+                    </button>
+                @endif
             </td>
         </tr>
     @empty
