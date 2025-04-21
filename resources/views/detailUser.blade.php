@@ -85,36 +85,40 @@
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Nomor</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Status</th>
                                   
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#ORD-2023-001</td>
-                                    <td>10 Apr 2023</td>
-                                    <td>Rp 750.000</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>#ORD-2023-002</td>
-                                    <td>25 Mar 2023</td>
-                                    <td>Rp 1.250.000</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>#ORD-2023-003</td>
-                                    <td>12 Mar 2023</td>
-                                    <td>Rp 500.000</td>
-                                    <td><span class="badge bg-info">Dikirim</span></td>
-                                    
-                                </tr>
-                            </tbody>
+                           <tbody>
+    @forelse ($transactions as $transaction)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+
+            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('d M Y') }}</td>
+            <td>Rp {{ number_format($transaction->total, 0, ',', '.') }}</td>
+            <td>
+                @php
+                    $status = strtolower($transaction->status);
+                    $badgeClass = match($status) {
+                        'berhasil' => 'bg-success',
+                        'menunggu' => 'bg-warning',
+                        'gagal' => 'bg-danger',
+                        default => 'bg-secondary',
+                    };
+                @endphp
+                <span class="badge {{ $badgeClass }}">{{ ucfirst($transaction->status) }}</span>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="4" class="text-center">Belum ada riwayat pembelian.</td>
+        </tr>
+    @endforelse
+</tbody>
+
                         </table>
                     </div>
                 </div>
