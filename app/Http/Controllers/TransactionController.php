@@ -69,4 +69,32 @@ class TransactionController extends Controller
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
+
+    public function deleteCart($id)
+    {
+        $cart = Cart::where('id', $id)->first();
+        if ($cart) {
+            $cart->delete();
+            return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang!');
+        } else {
+            return redirect()->back()->with('error', 'Produk tidak ditemukan di keranjang!');
+        }
+    }
+
+    public function checkout(Request $request)
+    {
+        $transaction = Transaction::where('user_id', Auth::user()->id)
+            ->where('status', '!=', 'Berhasil')
+            ->first();
+        if (!$transaction) {
+            return redirect('/cart')->with('error', 'Keranjang kosong!');
+        }
+
+        $transaction->status = 'Menunggu';
+        $transaction->shipping_method_id = $request->shipping_method_id;
+        $transaction->total = $request->total;
+        $transaction->save();
+
+        return redirect('/invoice/' . $transaction->id);
+    }
 }

@@ -9,7 +9,7 @@
 
 @endif
 @if (Session::get('success'))
-    <div style="width: 350px !important" class="alert alert-success alert-dismissible fade show">
+    <div style="width: 100% !important" class="alert alert-success alert-dismissible fade show">
     <ul>
             <li>{{Session::get('success')}}</li>
         </ul>

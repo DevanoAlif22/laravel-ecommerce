@@ -36,7 +36,7 @@
                         @endif
                         <h2 class="mb-2">{{ $product->name }}</h2>
                         <div class="d-flex align-items-center mb-3">
-                            <h3 class="text-danger fw-bold mb-0">Rp {{ number_format($item->price, 0, ',', '.') }}</h3>
+                            <h3 class="text-danger fw-bold mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
 
                         </div>
 
