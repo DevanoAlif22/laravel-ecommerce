@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransactionController extends Controller
 {
@@ -21,6 +22,13 @@ class TransactionController extends Controller
         return $randomString;
     }
 
+    public function print($id)
+    {
+        $transaction = Transaction::with(['user', 'cart.product.category', 'shippingMethod'])->findOrFail($id);
+        $pdf = Pdf::loadView('pdf.invoice', compact('transaction'));
+        return $pdf->stream("invoice-{$transaction->id}.pdf");
+    }
+
     public function index()
     {
         $transactions = Transaction::orderBy('id', 'desc')->get();
@@ -29,6 +37,14 @@ class TransactionController extends Controller
 
     public function addCart(Request $request)
     {
+        $transaction = Transaction::where('user_id', Auth::user()->id)
+            ->where('status', 'Menunggu')
+            ->first();
+
+        if ($transaction) {
+            return redirect('/invoice/' . $transaction->id);
+        }
+
         $validatedData = $request->validate([
             'product_id' => 'required|exists:products,id',
             'amount' => 'required|integer|min:1',
@@ -93,8 +109,99 @@ class TransactionController extends Controller
         $transaction->status = 'Menunggu';
         $transaction->shipping_method_id = $request->shipping_method_id;
         $transaction->total = $request->total;
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $transaction->total,
+            ),
+            'customer_details' => array(
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            )
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $transaction->token = $snapToken;
+
         $transaction->save();
 
         return redirect('/invoice/' . $transaction->id);
+    }
+
+
+    public function invoice($id)
+    {
+        $transaction = Transaction::where('id', $id)->first();
+        if (!$transaction) {
+            return redirect('/');
+        }
+        return view('invoice', compact('transaction'));
+    }
+
+    public function process(Request $request)
+    {
+        if (Auth::user()) {
+            $validasi = Transaction::with('users')->where('id_user', Auth::user()->id)->first();
+            if ($validasi != null && $validasi->status == 'pending') {
+                $validasi->delete();
+            } else if ($validasi != null && $validasi->status == 'success') {
+                return redirect('/');
+            }
+            $transaction = Transaction::create([
+                'id_user' => Auth::user()->id,
+                'status' => 'pending'
+            ]);
+
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = true;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => rand(),
+                    'gross_amount' => 1,
+                ),
+                'customer_details' => array(
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                )
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+            $transaction->token = $snapToken;
+            $transaction->save();
+            return view('main.payment', ['transaction' => $transaction]);
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function success($id)
+    {
+        $validasi = Transaction::where('id', $id)->first();
+        if ($validasi) {
+            $validasi->status = 'Berhasil';
+            $validasi->save();
+            return redirect('/invoice/' . $validasi->id);
+        } else {
+            return redirect('/');
+        }
     }
 }

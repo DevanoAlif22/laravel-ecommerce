@@ -52,6 +52,14 @@ class FrontController extends Controller
     public function cart()
     {
         $transaction = Transaction::where('user_id', Auth::user()->id)
+            ->where('status', 'Menunggu')
+            ->first();
+
+        if ($transaction) {
+            return redirect('/invoice/' . $transaction->id);
+        }
+
+        $transaction = Transaction::where('user_id', Auth::user()->id)
             ->where('status', '!=', 'Berhasil')
             ->first();
 
@@ -77,7 +85,7 @@ class FrontController extends Controller
         }
 
         $shippingMethod = ShippingMethod::orderBy('id', 'desc')->get();
-        return view('cart', compact('cart', 'shippingMethod', 'subtotal'));
+        return view('cart', compact('cart', 'shippingMethod', 'subtotal', 'transaction'));
     }
 
     public function login()
@@ -92,12 +100,7 @@ class FrontController extends Controller
     }
     public function detailUser()
     {
- $user = Auth::user();
-        return view('detailUser',compact('user'));
-    }
-    public function invoice()
-    {
-
-        return view('invoice');
+        $user = Auth::user();
+        return view('detailUser', compact('user'));
     }
 }
