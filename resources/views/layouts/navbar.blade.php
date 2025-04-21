@@ -28,6 +28,42 @@
         </a>
     </div>
 </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active fw-medium" href="{{ url('/') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{{ url('/products') }}">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{{ url('/categories') }}">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{{ url('/promo') }}">Promo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{{ url('/about') }}">Tentang Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{{ url('/contact') }}">Kontak</a>
+                </li>
+            </ul>
+            <div class="ms-3 d-flex">
+                {{-- <a href="{{ url('/cart') }}" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-cart3"></i> <span class="badge bg-danger">0</span>
+                </a> --}}
+                @if (Auth::user())
+                    <a href="{{ url('/logout') }}" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-right me-1"></i>Logout
+                    </a>
+                @else
+                    <a href="{{ url('/login') }}" class="btn btn-primary">
+                        <i class="bi bi-person"></i> Login
+                    </a>
 
+                @endif
+            </div>
+        </div>
     </div>
 </nav>

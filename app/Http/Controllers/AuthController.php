@@ -38,10 +38,40 @@ class AuthController extends Controller
         }
     }
 
+    public function loginUser(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|max:15',
+        ]);
+
+        $infologin = [
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+        ];
+
+        if (Auth::attempt($infologin)) {
+            $user = Auth::user();
+            if ($user->role == "2") {
+                return redirect('/');
+            } else {
+                Auth::logout(); // keluarin user yang role-nya tidak sesuai
+                return redirect('/login')->withErrors('Username atau password salah');
+            }
+        } else {
+            return redirect('/login')->withErrors('Username atau password salah');
+        }
+    }
+
     function logout()
     {
         Auth::logout();
         return redirect('/admin/login');
+    }
+    function logoutUser()
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 
     public function registerForm()
@@ -55,7 +85,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'gender' => 'required|in:male,female',
+            'gender' => 'required|in:Male,Female',
             'birth' => 'nullable|date',
             'address' => 'nullable|string',
             'city' => 'nullable|string',
@@ -64,6 +94,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $validated['name'],
+            'role' => "2",
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'gender' => $validated['gender'],
@@ -71,12 +102,12 @@ class AuthController extends Controller
             'address' => $validated['address'] ?? null,
             'city' => $validated['city'] ?? null,
             'contact' => $validated['contact'] ?? null,
-            'role' => 'user', // default role bisa diatur sesuai kebutuhan
             'bill' => 0
         ]);
 
+
         Auth::login($user);
 
-        return redirect('/admin/dashboard')->with('success', 'Registration successful.');
+        return redirect('/')->with('success', 'Registration successful.');
     }
 }

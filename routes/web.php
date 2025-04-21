@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
-
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +29,26 @@ Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
 Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
 Route::get('/detailUser', [FrontController::class, 'detailUser'])->name('detailUser');
 Route::get('/invoice', [FrontController::class, 'invoice'])->name('invoice');
+Route::get('/products/{id}', [FrontController::class, 'productCategory']);
+Route::post('/products/by/search', [FrontController::class, 'searchProduct']);
 
+Route::get('/product/detail/{id}', [FrontController::class, 'detailProduct'])->name('detailProduct');
+Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
 
 // cms admin
 Route::middleware('guest')->group(function () {
-    Route::get('/admin/login', [AuthController::class, 'index'])->name('login');
+    Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
+    Route::post('/login', [AuthController::class, 'loginUser']);
+    Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::get('/admin/login', [AuthController::class, 'index'])->name('admin.login');
     Route::post('/admin/login', [AuthController::class, 'loginAdmin']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logoutUser']);
+    Route::post('/product/add/cart', [TransactionController::class, 'addCart'])->name('login');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

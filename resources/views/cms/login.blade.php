@@ -12,10 +12,9 @@
   <body>
 
       <div class="m-auto form">
-            <form action="" method="post">
+            <form action="/login" method="post">
                 @csrf
-            <h2 style="padding-bottom: 30px;
-            color: #444444;" class="text-center"><b>MediMart</b></h2>
+            <h2 style="padding-bottom: 30px;color: #444444;" class="text-center"><b>MediMart</b></h2>
             <div class="wrap-login">
                 <p class="text-center pt-2">Sign in to start your session</p>
                 @if ($errors->any() || Session::get('success'))

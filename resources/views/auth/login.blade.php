@@ -12,21 +12,23 @@
                 </div>
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" width="100" class="img-fluid">
-                        <h4 class="mt-3">Selamat datang di <br><strong>Toko Alat Kesehatan</strong></h4>
+                        <h4 class="mt-3">Selamat datang di MediMart <br><strong>Toko Alat Kesehatan</strong></h4>
                         <p class="text-muted">Silakan login untuk melanjutkan</p>
                     </div>
+                    @if ($errors->any() || Session::get('success'))
+                            @include('layout/info')
+                    @endif
 
                     <form method="POST" action="">
                         @csrf
 
                         <div class="mb-3">
-                            <label for="user_id" class="form-label">User ID</label>
+                            <label for="user_id" class="form-label">Email</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light">
-                                    <i class="bi bi-person-fill"></i>
+                                    <i class="bi bi-envelope-fill"></i>
                                 </span>
-                                <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Masukkan user ID" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="daniel@example.com" required>
                             </div>
                         </div>
 
@@ -47,7 +49,7 @@
                     </form>
                 </div>
                 <div class="card-footer bg-light text-center py-3">
-                    <p class="mb-0">Belum memiliki akun? <a href="#" class="text-primary">Daftar sekarang</a></p>
+                    <p class="mb-0">Belum memiliki akun? <a href="/register" class="text-primary">Daftar sekarang</a></p>
                 </div>
             </div>
         </div>
