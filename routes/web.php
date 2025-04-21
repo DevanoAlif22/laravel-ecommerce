@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('/products', [FrontController::class, 'index'])->name('products');
+Route::get('/detailProduct', [FrontController::class, 'detailProduct'])->name('detailProduct');
+Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
+Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
+Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
