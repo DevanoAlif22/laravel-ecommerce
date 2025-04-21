@@ -33,7 +33,7 @@ Route::get('/products/{id}', [FrontController::class, 'productCategory']);
 Route::post('/products/by/search', [FrontController::class, 'searchProduct']);
 
 Route::get('/product/detail/{id}', [FrontController::class, 'detailProduct'])->name('detailProduct');
-Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
+Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
 
 // cms admin
 Route::middleware('guest')->group(function () {
@@ -49,6 +49,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logoutUser']);
     Route::post('/product/add/cart', [TransactionController::class, 'addCart'])->name('login');
+    Route::get('/cart/delete/{id}', [TransactionController::class, 'deleteCart']);
+    Route::post('/checkout', [TransactionController::class, 'checkout'])->name('checkout');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

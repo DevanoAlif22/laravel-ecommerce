@@ -90,6 +90,7 @@ class AuthController extends Controller
             'address' => 'nullable|string',
             'city' => 'nullable|string',
             'contact' => 'nullable|string',
+            'bill' => 'nullable|string',
         ]);
 
         $user = User::create([
@@ -102,7 +103,7 @@ class AuthController extends Controller
             'address' => $validated['address'] ?? null,
             'city' => $validated['city'] ?? null,
             'contact' => $validated['contact'] ?? null,
-            'bill' => 0
+            'bill' => $validated['contact'] ?? null,
         ]);
 
 
