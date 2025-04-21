@@ -23,17 +23,14 @@ use App\Models\Transaction;
 
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('/products', [FrontController::class, 'index'])->name('products');
-Route::get('/detailProduct', [FrontController::class, 'detailProduct'])->name('detailProduct');
-Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
 Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
 Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
 Route::get('/detailUser', [FrontController::class, 'detailUser'])->name('detailUser');
-Route::get('/invoice', [FrontController::class, 'invoice'])->name('invoice');
 Route::get('/products/{id}', [FrontController::class, 'productCategory']);
 Route::post('/products/by/search', [FrontController::class, 'searchProduct']);
 
 Route::get('/product/detail/{id}', [FrontController::class, 'detailProduct'])->name('detailProduct');
-Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
+Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
 
 // cms admin
 Route::middleware('guest')->group(function () {
@@ -49,6 +46,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logoutUser']);
     Route::post('/product/add/cart', [TransactionController::class, 'addCart'])->name('login');
+    Route::get('/cart/delete/{id}', [TransactionController::class, 'deleteCart']);
+    Route::post('/checkout', [TransactionController::class, 'checkout'])->name('checkout');
+    Route::get('/invoice/{id}', [TransactionController::class, 'invoice'])->name('invoice');
+    Route::get('/payment-success/{id}', [TransactionController::class, 'success'])->name('checkout-success');
+    Route::get('/invoice/print/{id}', [TransactionController::class, 'print'])->name('invoice.print');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

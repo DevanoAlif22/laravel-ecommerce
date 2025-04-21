@@ -93,7 +93,7 @@
                                     <span class="fw-bold text-danger">Rp {{ number_format($item->price, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="d-flex mt-3">
-                                    <a href="#" class="btn btn-primary flex-grow-1 me-2">
+                                    <a href="/product/detail/{{$item->id}}" class="btn btn-primary flex-grow-1 me-2">
                                         <i class="bi bi-cart-plus me-1"></i> Detail Produk
                                     </a>
                                 </div>

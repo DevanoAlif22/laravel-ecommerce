@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ShippingMethod;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,11 +49,45 @@ class FrontController extends Controller
         $products = Product::orderBy('id', 'desc')->take(4)->get();
         return view('detailProduct', compact('product', 'products'));
     }
-    public function baskets()
+    public function cart()
     {
+        $transaction = Transaction::where('user_id', Auth::user()->id)
+            ->where('status', 'Menunggu')
+            ->first();
 
-        return view('baskets');
+        if ($transaction) {
+            return redirect('/invoice/' . $transaction->id);
+        }
+
+        $transaction = Transaction::where('user_id', Auth::user()->id)
+            ->where('status', '!=', 'Berhasil')
+            ->first();
+
+        if (!$transaction) {
+            $cart = null;
+            $subtotal = 0;
+            $shippingMethod = ShippingMethod::orderBy('id', 'desc')->get();
+            return view('cart', compact('cart', 'shippingMethod', 'subtotal'));
+        }
+
+        $cart = Cart::where('user_id', Auth::user()->id)
+            ->where('transaction_id', $transaction->id)
+            ->get();
+
+        if ($cart->isEmpty()) {
+            $cart = null;
+            $subtotal = 0;
+        } else {
+            $subtotal = 0;
+            foreach ($cart as $c) {
+                $subtotal += $c->total;
+            }
+        }
+
+        $shippingMethod = ShippingMethod::orderBy('id', 'desc')->get();
+        return view('cart', compact('cart', 'shippingMethod', 'subtotal', 'transaction'));
     }
+
     public function login()
     {
 
@@ -63,14 +99,13 @@ class FrontController extends Controller
         return view('auth.register');
     }
     public function detailUser()
-{
-    $user = Auth::user();
-   $transactions = Transaction::where('user_id', $user->id)->latest()->get();
-    return view('detailUser', compact('user', 'transactions'));
-}
+    {
+        $user = Auth::user();
+       $transactions = Transaction::where('user_id', $user->id)->latest()->get();
+        return view('detailUser', compact('user', 'transactions'));
+    }
     public function invoice()
     {
-
         return view('invoice');
-    }
+    {
 }
