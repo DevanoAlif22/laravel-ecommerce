@@ -123,6 +123,129 @@
 </section>
 
 <!-- Testimonials -->
+<!-- Testimonials -->
+<section class="testimonials-section py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Ulasan Pelanggan</h2>
+        
+        <div class="row">
+            <!-- Form Ulasan (Kiri) -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h4 class="card-title text-center mb-4">Tulis Ulasan</h4>
+                        <form id="reviewForm" action="" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama Anda</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="review" class="form-label">Ulasan Anda</label>
+                                <textarea class="form-control" id="review" name="review" rows="6" required></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Kirim Ulasan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial Slider (Kanan) -->
+            <div class="col-md-8">
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Testimonial 1 -->
+                        <div class="carousel-item active">
+                            <div class="card border-0 shadow-sm mx-2">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                      
+                                        <div>
+                                            <h5 class="mb-0">Ahmad Fauzi</h5>
+                                            <small class="text-muted">15 April 2025</small>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">"Saya sangat puas dengan tensimeter digital yang saya beli dari MediMart. Pengirimannya cepat dan produknya sangat akurat. Cocok untuk monitoring tekanan darah secara mandiri di rumah. Staf customer service juga sangat membantu ketika saya memiliki pertanyaan tentang penggunaan produk."</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="carousel-item">
+                            <div class="card border-0 shadow-sm mx-2">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                      
+                                        <div>
+                                            <h5 class="mb-0">Siti Rahma</h5>
+                                            <small class="text-muted">10 April 2025</small>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">"Alat cek gula darah yang saya beli sangat mudah digunakan dan hasilnya akurat. Pelayanan MediMart juga sangat responsif, mereka membantu saya memilih produk yang tepat sesuai kebutuhan. Pengiriman juga cepat meskipun ke alamat saya yang cukup jauh. Sangat merekomendasikan untuk kebutuhan alat kesehatan."</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="carousel-item">
+                            <div class="card border-0 shadow-sm mx-2">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                      
+                                        <div>
+                                            <h5 class="mb-0">Budi Santoso</h5>
+                                            <small class="text-muted">5 April 2025</small>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">"Saya membeli beberapa alat kesehatan untuk klinik saya dan semuanya berkualitas tinggi. Proses pengiriman internasional juga lancar tanpa kendala. Tim MediMart sangat profesional dalam menangani pesanan dalam jumlah besar dan memberikan solusi yang tepat untuk kebutuhan klinik kami. Pasti akan berbelanja kembali di sini."</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="carousel-item">
+                            <div class="card border-0 shadow-sm mx-2">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                      
+                                        <div>
+                                            <h5 class="mb-0">Dewi Lestari</h5>
+                                            <small class="text-muted">1 April 2025</small>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">"Saya baru saja menerima pesanan termometer digital dan pulse oximeter dari MediMart. Kualitasnya sangat baik dan harganya terjangkau. Pengiriman juga tepat waktu dan aman sampai tujuan. Saya sangat senang bisa menemukan semua kebutuhan alat kesehatan untuk keluarga dalam satu toko online yang terpercaya."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-primary rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-primary rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    
+                    <!-- Indicators -->
+                    <div class="carousel-indicators position-relative mt-3">
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" class="bg-primary" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" class="bg-primary" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3" class="bg-primary" aria-label="Slide 4"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 
@@ -229,6 +352,49 @@
     .btn-primary:hover {
         background-color: #0056b3;
         border-color: #0056b3;
+    }
+
+<!-- Tambahkan style untuk bagian testimonials -->
+
+    /* Style untuk testimonial section */
+    .testimonials-section {
+        background-color: #f8f9fa;
+    }
+    
+    .testimonial-slider .carousel-item {
+        padding: 20px 10px;
+    }
+    
+    #testimonialCarousel .card {
+        transition: transform 0.3s ease;
+        min-height: 280px;
+    }
+    
+    #testimonialCarousel .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        padding: 15px;
+    }
+    
+    .carousel-indicators {
+        bottom: -10px;
+    }
+    
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .col-md-4 {
+            margin-bottom: 30px;
+        }
     }
 
 </style>
