@@ -60,4 +60,14 @@ class FrontController extends Controller
 
         return view('auth.register');
     }
+    public function detailUser()
+    {
+
+        return view('detailUser');
+    }
+    public function invoice()
+    {
+
+        return view('invoice');
+    }
 }
