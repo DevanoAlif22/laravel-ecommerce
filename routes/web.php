@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Product;
-use App\Models\Transaction;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\AuthController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,12 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
+Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('/products', [FrontController::class, 'index'])->name('products');
+Route::get('/detailProduct', [FrontController::class, 'detailProduct'])->name('detailProduct');
+Route::get('/baskets', [FrontController::class, 'baskets'])->name('baskets');
+Route::get('/login', [FrontController::class, 'login'])->name('auth.login');
+Route::get('/register', [FrontController::class, 'register'])->name('auth.register');
 Route::get('/', function () {
     return view('welcome');
 });
