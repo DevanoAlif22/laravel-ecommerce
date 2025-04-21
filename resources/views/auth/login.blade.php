@@ -49,7 +49,7 @@
                     </form>
                 </div>
                 <div class="card-footer bg-light text-center py-3">
-                    <p class="mb-0">Belum memiliki akun? <a href="/register" class="text-primary">Daftar sekarang</a></p>
+                    <p class="mb-0">Belum memiliki akun? <a href="/register" class="text-primary">Daftar sekarang</a> <a href="/">atau kembali</a></p>
                 </div>
             </div>
         </div>

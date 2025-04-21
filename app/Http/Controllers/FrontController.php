@@ -101,11 +101,11 @@ class FrontController extends Controller
     public function detailUser()
     {
         $user = Auth::user();
-       $transactions = Transaction::where('user_id', $user->id)->latest()->get();
+        $transactions = Transaction::where('user_id', $user->id)->latest()->get();
         return view('detailUser', compact('user', 'transactions'));
     }
     public function invoice()
     {
         return view('invoice');
-    {
+    }
 }

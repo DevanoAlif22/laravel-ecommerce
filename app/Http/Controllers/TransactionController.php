@@ -35,6 +35,32 @@ class TransactionController extends Controller
         return view('cms.transaction.index', compact('transactions'));
     }
 
+    public function cancelInvoice($id)
+    {
+        $transaction = Transaction::where('id', $id)->where('status', 'Menunggu')->where('user_id', Auth::user()->id)->first();
+        if ($transaction) {
+            $transaction->status = 'Gagal';
+            $transaction->save();
+            Cart::where('transaction_id', $transaction->id)->delete();
+            return redirect()->back()->with('success', 'Transaksi berhasil dibatalkan!');
+        } else {
+            return redirect()->back()->with('error', 'Transaksi tidak ditemukan!');
+        }
+    }
+
+    public function cancelInvoiceAdmin($id)
+    {
+        $transaction = Transaction::where('id', $id)->where('status', 'Menunggu')->first();
+        if ($transaction) {
+            $transaction->status = 'Gagal';
+            $transaction->save();
+            Cart::where('transaction_id', $transaction->id)->delete();
+            return redirect()->back()->with('success', 'Transaksi berhasil dibatalkan!');
+        } else {
+            return redirect()->back()->with('error', 'Transaksi tidak ditemukan!');
+        }
+    }
+
     public function addCart(Request $request)
     {
         $transaction = Transaction::where('user_id', Auth::user()->id)

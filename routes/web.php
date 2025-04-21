@@ -51,12 +51,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/{id}', [TransactionController::class, 'invoice'])->name('invoice');
     Route::get('/payment-success/{id}', [TransactionController::class, 'success'])->name('checkout-success');
     Route::get('/invoice/print/{id}', [TransactionController::class, 'print'])->name('invoice.print');
+    Route::get('/invoice/cancel/{id}', [TransactionController::class, 'cancelInvoice']);
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     // Route Resource untuk ProductController
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('products', ProductController::class);
+        Route::get('/invoice/cancel/{id}', [TransactionController::class, 'cancelInvoiceAdmin']);
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 
